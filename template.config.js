@@ -1,4 +1,4 @@
 module.exports = {
-    placeholderName: 'SolanaMobileDAppScaffold',
-    templateDir: './template',
+    placeholderName: 'SagaTokenGatedMobileDApp',
+    templateDir: './app',
 }

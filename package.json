@@ -1,17 +1,14 @@
 {
-    "name": "@solana-mobile/solana-mobile-dapp-scaffold",
+    "name": "@helius/saga-token-gating-tutorial",
     "version": "0.0.1",
-    "description": "A quickstart React Native template for a Solana Mobile dApp with polyfills and dependencies installed",
-    "scripts": {
-        "test": "exit 0"
-    },
+    "description": "Solana Saga token-gating tutorial for mobile development, adapted from @solana-mobile/solana-mobile-dapp-scaffold.",
     "files": [
-        "template",
-        "template.config.js"
+        "app",
+        "app.config.js"
     ],
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/solana-mobile/solana-mobile-dapp-scaffold.git"
+        "url": "git+https://github.com/helius-labs/saga-token-gating-tutorial.git"
     },
     "keywords": [
         "react-native",
@@ -24,10 +21,7 @@
     ],
     "author": "Michael Sulistio <michaelsulistio@gmail.com>",
     "license": "MIT",
-    "bugs": {
-        "url": "https://github.com/solana-mobile/solana-mobile-dapp-scaffold/issues"
-    },
-    "homepage": "https://github.com/solana-mobile/solana-mobile-dapp-scaffold#readme",
+    "homepage": "https://github.com/helius-labs/saga-token-gating-tutorial.git#readme",
     "dependencies": {
         "global": "^4.4.0",
         "react-native": "^0.72.3",
