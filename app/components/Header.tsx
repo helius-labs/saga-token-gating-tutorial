@@ -1,34 +1,51 @@
 import React from 'react';
-import {
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
+import {Image, StyleSheet, Text, View} from 'react-native';
 import {Colors} from './Colors';
 
 export function Header() {
   return (
     <View style={styles.background}>
-      <Text style={styles.title}>SAGA HOLDERS ONLY!</Text>
+      <View style={styles.container}>
+        <Image
+          source={require('../img/saga_genesis_title.png')}
+          style={styles.logo}
+        />
+        <Text style={styles.text}>Verify Ownership</Text>
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   background: {
-    backgroundColor: Colors.primary,
+    paddingTop: 48,
     paddingBottom: 24,
-    paddingTop: 24,
-    paddingHorizontal: 32,
+    paddingHorizontal: 64,
+    width: '100%',
+  },
+  container: {
+    width: '100%',
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 12,
   },
   logo: {
-    overflow: 'visible',
-    resizeMode: 'cover',
+    width: '100%',
+    height: 50,
+    resizeMode: 'contain',
   },
   title: {
+    color: Colors.orange,
+    fontSize: 48,
+    textAlign: 'center',
+    fontFamily: 'OutfitSemiBold',
+  },
+  text: {
     color: '#fff',
     fontSize: 24,
-    fontWeight: '700',
     textAlign: 'center',
+    fontFamily: 'Outfit',
   },
 });

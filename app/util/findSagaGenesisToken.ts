@@ -1,10 +1,10 @@
-import { PublicKey } from "@solana/web3.js";
+import {PublicKey} from '@solana/web3.js';
 
 export default async function findSagaGenesisToken(address: PublicKey) {
   const SagaSeed = '46pcSL5gmjBrPqGKFaLbbCmR6iVuLJbnQy13hAe7s6CC';
 
   const HELIUS_APIKEY = '';
-  const url = `https://mainnet.helius-rpc.com/?api-key=${HELIUS_APIKEY}`
+  const url = `https://mainnet.helius-rpc.com/?api-key=${HELIUS_APIKEY}`;
 
   const response = await fetch(url, {
     method: 'POST',
@@ -17,13 +17,13 @@ export default async function findSagaGenesisToken(address: PublicKey) {
       method: 'searchAssets',
       params: {
         ownerAddress: address.toString(),
-        grouping: ["collection", SagaSeed],
+        grouping: ['collection', SagaSeed],
         page: 1,
-        limit: 10
+        limit: 10,
       },
     }),
   });
-  
-  const { result } = await response.json();
-  return (result.items)
-};
+
+  const {result} = await response.json();
+  return result.items;
+}

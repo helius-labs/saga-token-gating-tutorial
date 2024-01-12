@@ -9,6 +9,7 @@ import {AuthorizationProvider} from './components/providers/AuthorizationProvide
 import {Header} from './components/Header';
 
 import MainScreen from './screens/MainScreen';
+import {Colors} from './components/Colors';
 
 export default function App() {
   return (
@@ -28,5 +29,6 @@ export default function App() {
 const styles = StyleSheet.create({
   shell: {
     height: '100%',
+    backgroundColor: Colors.black,
   },
 });

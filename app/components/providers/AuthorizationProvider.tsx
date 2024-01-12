@@ -65,7 +65,7 @@ function getPublicKeyFromAddress(address: Base64EncodedAddress): PublicKey {
 
 export const APP_IDENTITY = {
   name: 'Saga Token Gated Dapp',
-  uri: 'https://solanamobile.com',
+  uri: 'https://helius.dev',
   icon: 'favicon.ico',
 };
 
