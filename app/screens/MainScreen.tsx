@@ -2,21 +2,40 @@ import React, {useCallback, useState} from 'react';
 import {Image, Pressable, StyleSheet, Text, View} from 'react-native';
 import findSagaGenesisToken from '../util/findSagaGenesisToken';
 import {useAuthorization} from '../components/providers/AuthorizationProvider';
-import {transact} from '@solana-mobile/mobile-wallet-adapter-protocol';
+import {
+  transact,
+  Web3MobileWallet,
+} from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
 import {Colors} from '../components/Colors';
 
 export default function MainScreen() {
-  const {authorizeSession} = useAuthorization();
-  const {deauthorizeSession} = useAuthorization();
+  const {authorizeSession, deauthorizeSession} = useAuthorization();
   const [verified, setVerified] = useState<boolean | undefined>();
 
+  // Checks if the user's wallet has a Saga Genesis Token
   const handleConnectPress = useCallback(async () => {
-    await transact(async wallet => {
+    return await transact(async (wallet: Web3MobileWallet) => {
       const {publicKey} = await authorizeSession(wallet);
-      const result = await findSagaGenesisToken(publicKey);
 
-      if (result.length === 1) {
-        setVerified(true);
+      const message = 'Confirm that you own this wallet.';
+      const messageBuffer = new Uint8Array(
+        message.split('').map(c => c.charCodeAt(0)),
+      );
+
+      const signedMessages = await wallet.signMessages({
+          addresses: [publicKey.toBase58()],
+          payloads: [messageBuffer],
+      });
+
+      if (signedMessages.length > 0) {
+        const result = await findSagaGenesisToken(publicKey);
+
+        // Checks that user has exactly 1 Saga Genesis Token
+        if (result.length === 1) {
+          setVerified(true);
+        } else {
+          setVerified(false);
+        }  
       } else {
         setVerified(false);
       }

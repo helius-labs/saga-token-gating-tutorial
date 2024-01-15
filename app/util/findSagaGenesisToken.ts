@@ -1,8 +1,10 @@
 import {PublicKey} from '@solana/web3.js';
 
 export default async function findSagaGenesisToken(address: PublicKey) {
+  // Replace this with the token address to gate for
   const SagaSeed = '46pcSL5gmjBrPqGKFaLbbCmR6iVuLJbnQy13hAe7s6CC';
 
+  // Populate your Helius API key
   const HELIUS_APIKEY = '';
   const url = `https://mainnet.helius-rpc.com/?api-key=${HELIUS_APIKEY}`;
 
