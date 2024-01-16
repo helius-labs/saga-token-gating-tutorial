@@ -7,6 +7,7 @@ import {
   Web3MobileWallet,
 } from '@solana-mobile/mobile-wallet-adapter-protocol-web3js';
 import {Colors} from '../components/Colors';
+import { sign } from "tweetnacl";
 
 export default function MainScreen() {
   const {authorizeSession, deauthorizeSession} = useAuthorization();
@@ -15,7 +16,7 @@ export default function MainScreen() {
   // Checks if the user's wallet has a Saga Genesis Token
   const handleConnectPress = useCallback(async () => {
     return await transact(async (wallet: Web3MobileWallet) => {
-      const {publicKey} = await authorizeSession(wallet);
+      const authorizationResult = await authorizeSession(wallet);
 
       const message = 'Confirm that you own this wallet.';
       const messageBuffer = new Uint8Array(
@@ -23,12 +24,18 @@ export default function MainScreen() {
       );
 
       const signedMessages = await wallet.signMessages({
-          addresses: [publicKey.toBase58()],
+          addresses: [authorizationResult.address],
           payloads: [messageBuffer],
       });
 
-      if (signedMessages.length > 0) {
-        const result = await findSagaGenesisToken(publicKey);
+      const verified = sign.detached.verify(
+         messageBuffer,
+        signedMessages[0],
+        authorizationResult.publicKey.toBytes()
+      );
+    
+      if (verified) {
+        const result = await findSagaGenesisToken(authorizationResult.publicKey);
 
         // Checks that user has exactly 1 Saga Genesis Token
         if (result.length === 1) {
